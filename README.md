@@ -1,5 +1,5 @@
 # KnowledgeCity Platform - Terraform Infrastructure
-![Uploading DEVOPSTASK.png…]()
+![Uploading DEVOPSTASK.png…]
 
 
 [![Terraform](https://img.shields.io/badge/Terraform-v1.0%2B-blue?logo=terraform)](https://www.terraform.io/)
