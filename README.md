@@ -51,12 +51,6 @@ KnowledgeCity leverages Terraform to provision and manage a robust, secure, and 
 - **Security:** WAF, AWS Shield, GuardDuty, KMS, IAM, Security Groups  
 - **Monitoring:** CloudWatch, Prometheus, Grafana
 
-**See detailed diagrams:**  
-- [AWS Architecture Diagram (with icons)](aws-architecture-diagram-with-icons.md)  
-- [Component Diagram](component-diagram.md)  
-- [Network Topology](network-topology.md)  
-- [Deployment Architecture](deployment-architecture.md)  
-- [Network Architecture (detailed)](network-architecture-detailed.md)  
 
 ---
 
