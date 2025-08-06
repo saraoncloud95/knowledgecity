@@ -102,7 +102,6 @@ This architecture is designed as part of the **Senior DevOps Engineer Test Task*
 
 ## 🛡️ Architecture Diagram
 
-> See `DEVOPSTASK.png` above for a detailed view of the entire multi-region setup.
 
 ---
 
