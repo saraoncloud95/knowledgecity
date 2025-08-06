@@ -1,5 +1,5 @@
 # KnowledgeCity Platform - Terraform Infrastructure
-![Uploading DEVOPSTASK.png…]()
+https://lucid.app/lucidchart/2efd8c7a-1787-4132-8f9c-2151dec99f47/edit?viewport_loc=-5504%2C-1584%2C6388%2C3772%2C0_0&invitationId=inv_8e0d77d2-a8f8-4bb1-8726-4f273b246441
 
 
 [![Terraform](https://img.shields.io/badge/Terraform-v1.0%2B-blue?logo=terraform)](https://www.terraform.io/)
