@@ -1,0 +1,72 @@
+# Environment Configuration
+environment = "prod"
+
+# Domain Configuration
+domain_name = "knowledgecity.com"
+
+# Primary Region (US)
+primary_region = "us-east-1"
+primary_vpc_cidr = "10.0.0.0/16"
+primary_availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+# Secondary Region (Saudi Arabia)
+secondary_region = "me-south-1"
+secondary_vpc_cidr = "10.1.0.0/16"
+secondary_availability_zones = ["me-south-1a", "me-south-1b"]
+
+# EKS Node Groups Configuration
+primary_node_groups = {
+  general = {
+    instance_types = ["t3.medium", "t3.large"]
+    capacity_type  = "ON_DEMAND"
+    min_size       = 2
+    max_size       = 10
+    desired_size   = 3
+  }
+  video-processing = {
+    instance_types = ["c5.2xlarge", "c5.4xlarge"]
+    capacity_type  = "ON_DEMAND"
+    min_size       = 1
+    max_size       = 5
+    desired_size   = 2
+  }
+}
+
+secondary_node_groups = {
+  general = {
+    instance_types = ["t3.medium", "t3.large"]
+    capacity_type  = "ON_DEMAND"
+    min_size       = 2
+    max_size       = 8
+    desired_size   = 2
+  }
+}
+
+# Database Configuration
+database_instance_class = "db.r6g.xlarge"
+database_engine_version = "8.0.35"
+database_allocated_storage = 100
+database_backup_retention_period = 30
+
+# ClickHouse Configuration
+clickhouse_instance_type = "r6g.2xlarge"
+clickhouse_node_count = 3
+
+# Storage Configuration
+video_storage_class = "STANDARD_IA"
+content_storage_class = "STANDARD"
+
+# Monitoring Configuration
+enable_cloudwatch_logs = true
+enable_cloudwatch_metrics = true
+
+# Security Configuration
+enable_waf = true
+enable_ddos_protection = true
+
+# Additional Tags
+tags = {
+  Owner       = "DevOps"
+  CostCenter  = "Engineering"
+  Environment = "Production"
+} 
