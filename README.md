@@ -1,118 +1,118 @@
-# KnowledgeCity Platform - Terraform Infrastructure
+# 🌍 KnowledgeCity Multi-Region AWS Architecture
 
-[![Terraform](https://img.shields.io/badge/Terraform-v1.0%2B-blue?logo=terraform)](https://www.terraform.io/)
-[![AWS](https://img.shields.io/badge/AWS-Cloud-orange?logo=amazon-aws)](https://aws.amazon.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![AWS Architecture Diagram](DEVOPSTASK.png)
 
-> **Enterprise-grade, multi-region, highly available infrastructure for the KnowledgeCity educational platform, managed with Terraform.**
+> A highly available, secure, and scalable AWS architecture designed for a global educational platform, addressing multi-region deployment, high availability, video processing, and data sovereignty for both US and Middle East (ME-South) regions.
 
 ---
 
-## Table of Contents
+## 📘 Project Overview
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
-- [Module Structure](#module-structure)
-- [Deployment](#deployment)
-- [Scaling & Cost Optimization](#scaling--cost-optimization)
-- [Security & Compliance](#security--compliance)
-- [Monitoring & Maintenance](#monitoring--maintenance)
-- [Disaster Recovery](#disaster-recovery)
-- [Troubleshooting & FAQ](#troubleshooting--faq)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+This architecture is designed as part of the **Senior DevOps Engineer Test Task** for **KnowledgeCity**. It represents a real-world, production-grade, multi-region cloud infrastructure optimized for performance, scalability, security, and cost-efficiency.
 
 ---
 
-## Overview
+## 🧩 Core Architecture Components
 
-KnowledgeCity Platform leverages Terraform to provision and manage a robust, secure, and scalable AWS infrastructure for a global educational service. The platform is designed for high availability, regional data compliance, and cost efficiency.
+### 🌐 Front-End Delivery
+- **Single Page Application (SPA)** hosted on Amazon EKS
+- Delivered globally via **Amazon CloudFront**
+- Geo-routed using **Amazon Route 53** for latency-based routing and health checks
 
----
-
-## Architecture
-
-- **Multi-Region:**  
-  - **Primary:** US-East-1  
-  - **Secondary:** ME-South-1  
-- **Core Components:**  
-  - Frontend SPA (React/Svelte) via CloudFront CDN  
-  - Monolithic PHP backend, analytics (ClickHouse), video processing microservices  
-  - RDS MySQL, S3 Buckets, EKS clusters, ALB, Route53  
-- **Security:** WAF, AWS Shield, GuardDuty, KMS, IAM, Security Groups  
-- **Monitoring:** CloudWatch, Prometheus, Grafana
-
-**See detailed diagrams:**  
-- [AWS Architecture Diagram (with icons)](aws-architecture-diagram-with-icons.md)  
-- [Component Diagram](component-diagram.md)  
-- [Network Topology](network-topology.md)  
-- [Deployment Architecture](deployment-architecture.md)  
-- [Network Architecture (detailed)](network-architecture-detailed.md)  
+### 🐘 Backend Services
+- **Monolithic PHP application** running in containers on Amazon EKS
+- **Analytics Microservice** using **ClickHouse** for real-time interaction tracking
+- **Video Conversion Microservice** deployed on EKS for transcoding uploaded videos
 
 ---
 
-## Features
+## 🌍 Multi-Region Deployment
 
-- Multi-region, highly available setup
-- Regional data compliance (US & Saudi Arabia)
-- Modular Terraform codebase
-- Automated monitoring, alerting, and disaster recovery
-- Cost optimization strategies
-- Secure by design (encryption, IAM, WAF, DDoS protection)
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- [Terraform](https://www.terraform.io/downloads.html) >= 1.0
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured with credentials
-- Registered domain in Route53
-- Sufficient AWS permissions
-
-### Quick Start
-
-```bash
-# 1. Clone the repository
-git clone <repository-url>
-cd Devops-task
-
-# 2. Configure variables
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your values
-
-# 3. Initialize Terraform
-terraform init
-
-# 4. Plan and apply
-terraform plan
-terraform apply
-```
+- **Primary Region**: `us-east-1` (for U.S. users and content)
+- **Secondary Region**: `me-south-1` (for Saudi Arabia and Middle East users)
+- Each region includes:
+  - 3 **Public Subnets** with IGWs, ALBs, and NAT Gateways
+  - 3 **Private Subnets** hosting EKS Pods
+  - 3 **DB Subnets** with RDS and ClickHouse
+- **Cross-Region Replication** for S3 and RDS to ensure compliance and redundancy
 
 ---
 
-## Configuration
+## 🔒 Security Architecture
 
-Edit `terraform.tfvars` to customize your deployment. Example variables:
-
-```hcl
-# Environment
-environment = "prod"
-# Domain
-domain_name = "knowledgecity.com"
-# Regions
-primary_region = "us-east-1"
-secondary_region = "me-south-1"
-# EKS Node Groups, RDS, ClickHouse, S3, Security, Monitoring, Tags, etc.
-```
-
-See [`terraform.tfvars.example`](terraform.tfvars.example) for all options and documentation.
+- **AWS WAF**: Protects web apps against OWASP threats
+- **AWS Shield**: DDoS mitigation
+- **Amazon GuardDuty**: Continuous threat detection
+- **AWS KMS**: Encryption key management
+- **IAM**: Role-based access control
+- **Private Subnets**: All compute, databases, and services isolated from the public internet
 
 ---
 
-## Module Structure
+## 📈 Observability & Monitoring
+
+- **Amazon CloudWatch**: Logs, metrics, and alarms
+- **Prometheus & Grafana**: Application-level metrics and dashboards
+- **Amazon SNS**: Notification system for alerts and monitoring
+- **(Optional)** Integration with **OpenTelemetry**, **CloudTrail**, or **ELK/EFK**
+
+---
+
+## 🎥 Media Storage & Delivery
+
+- Users upload raw videos to **Amazon S3**
+- **Video Processing Microservice** (in EKS) converts them into optimized formats
+- Final assets delivered via **CloudFront**, with **S3 Lifecycle Policies** for tiered storage
+
+---
+
+## ⚙️ Scalability & Cost Optimization
+
+- **EKS Cluster Autoscaler** with Spot and On-Demand Instances
+- **S3 Cross-Region Replication** + lifecycle management
+- **CDN caching** for global asset delivery
+- Infrastructure is modular and **ready for Terraform/IaC integration**
+
+---
+
+## ✅ SLA, Compliance & Data Residency
+
+- 99.99% availability with **multi-AZ redundancy**
+- Saudi user data stored in **me-south-1**, U.S. data in **us-east-1**
+- Easily adaptable to GDPR, HIPAA, or future regulatory changes
+
+---
+
+## 📌 Technologies Used
+
+| Category          | Services/Tools                        |
+|-------------------|---------------------------------------|
+| Compute           | Amazon EKS (Kubernetes)               |
+| Storage           | Amazon S3, Lifecycle Policies         |
+| Database          | Amazon RDS (MySQL), ClickHouse        |
+| Networking        | VPC, NAT, IGW, ALB                    |
+| Security          | WAF, Shield, GuardDuty, KMS, IAM      |
+| Monitoring        | CloudWatch, Prometheus, Grafana, SNS |
+| CDN / DNS         | CloudFront, Route 53                  |
+| Cost Optimization | Spot Instances, S3 Tiering            |
+
+---
+
+## 🛡️ Architecture Diagram
+
+> See `DEVOPSTASK.png` above for a detailed view of the entire multi-region setup.
+
+---
+
+## 👩‍💻 Author
+
+**Sara Taha**  
+Senior DevOps Engineer  
+📍 Jordan | 🌍 Remote-Friendly  
+🚀 Passionate about cloud architecture, observability, and scalable systems.
+
+---
+
+## 📄 License
+
+This project is for demonstration purposes as part of a test task. All rights reserved.
