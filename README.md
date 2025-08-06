@@ -1,6 +1,7 @@
 # 🌍 KnowledgeCity Multi-Region AWS Architecture
 
-<img width="7180" height="4420" alt="Blank diagram (2)" src="https://github.com/user-attachments/assets/6478927d-0795-434e-a1f9-9d5055be1702" />
+<img width="6540" height="3440" alt="Blank diagram (4)" src="https://github.com/user-attachments/assets/8fb1efd1-08df-46aa-aadc-ad37ad65e24c" />
+
 
 > A highly available, secure, and scalable AWS architecture designed for a global educational platform, addressing multi-region deployment, high availability, video processing, and data sovereignty for both US and Middle East (ME-South) regions.
 
